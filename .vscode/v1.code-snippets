@@ -1,0 +1,39 @@
+{
+	// Place your Vue 工作区 snippets here. Each snippet is defined under a snippet name and has a scope, prefix, body and 
+	// description. Add comma separated ids of the languages where the snippet is applicable in the scope field. If scope 
+	// is left empty or omitted, the snippet gets applied to all languages. The prefix is what is 
+	// used to trigger the snippet and the body will be expanded and inserted. Possible variables are: 
+	// $1, $2 for tab stops, $0 for the final cursor position, and ${1:label}, ${2:another} for placeholders. 
+	// Placeholders with the same ids are connected.
+	// Example:
+	"Print to console": {
+		"scope": "html",
+		"prefix": "v1",
+		"body": [
+			"<!DOCTYPE html>",
+      "<html lang='en'>",
+      "<head>",
+        "\t<meta charset='UTF-8'>",
+        "\t<meta http-equiv='X-UA-Compatible' content='IE=edge'>",
+        "\t<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+        "\t<title>el和data的两种写法</title>",
+        "\t<script src='../../vue.js' type='text/javascript'></script>",
+      "</head>",
+      "<body>",
+        "\t<div id='root'>",
+        "\t</div>",
+        "\t<script type='text/javascript'>",
+          "\t\tVue.config.productionTip = false;",
+          "\t\tnew Vue({",
+            "\t\t\tel: '#root',",
+            "\t\t\tdata:{",
+              "\t\t\t\tname: 'doris'",
+            "\t\t\t}",
+          "\t\t})",    
+        "\t</script>",
+      "</body>",
+      "</html>",
+		],
+		"description": "Log output to console"
+	}
+}

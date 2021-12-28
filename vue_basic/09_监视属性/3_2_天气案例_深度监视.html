@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>3_2_天气案例_深度监视</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+
+<body>
+  <!--  
+    深度监视：
+      1.Vue中的watch默认不检测对象内部值的改变（一层）
+      2.配置deep:true 可以检测对象内部值的改变（多层）
+    备注：
+      1.Vue自身可以检测对象内部值的改变，但Vue提供的watch默认不可以
+      2.使用watch时根据数据的具体结构，决定是否采用深度监视
+      
+  -->
+  <div id='root'>
+    <h2>今天天气 {{info}}</h2>
+    <button @click="changed">点击切换</button>
+    <hr>
+    <h3>a的值是： {{numbers.a}}</h3>
+    <button @click="numbers.a++">点击a++</button>
+    <h3>b的值是： {{numbers.b}}</h3>
+    <button @click="numbers.b++">点击b++</button>
+  </div>
+  <script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        isHot: true,
+        numbers:{
+          a:1,
+          b:2
+        }
+      },
+      methods: {
+        changed() {
+          this.isHot = !this.isHot
+        }
+      },
+      computed: {
+        info() {
+          return this.isHot ? "凉爽" : "炎热"
+        }
+      },
+      watch: {
+        isHot: {
+          immediate: true, // 初始化时让handler调用一下
+          // 当isHot发生改变时，被调用
+          handler(newValue, oldValue) {
+            console.log("被调用", newValue, oldValue)
+          }
+        },
+        // 监视多级结构中某个属性的变化
+        // "numbers":{ 
+        //   handler(){
+        //     console.log("a被操作")
+        //   }
+        // },
+        // 监视多级结构中内部所有属性的变化
+        "numbers":{
+          deep:true,  
+          handler(){
+            console.log("a被操作")
+          }
+        }
+      },
+    })
+  </script>
+</body>
+
+</html>

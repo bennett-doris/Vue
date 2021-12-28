@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>3_2_天气案例_深度监视</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+
+<body>
+  <div id='root'>
+    <h2>今天天气 {{info}}</h2>
+    <button @click="changed">点击切换</button>
+    <hr>
+  </div>
+  <script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el: '#root',
+      data: {
+        isHot: true,
+      },
+      methods: {
+        changed() {
+          this.isHot = !this.isHot
+        }
+      },
+      computed: {
+        info() {
+          return this.isHot ? "凉爽" : "炎热"
+        }
+      },
+      watch: {
+        // 正常写法(需要配置项)
+        // isHot: {
+        //   immediate: true, // 初始化时让handler调用一下
+        //   // 当isHot发生改变时，被调用
+        //   handler(newValue, oldValue) {
+        //     console.log("被调用", newValue, oldValue)
+        //   }
+        // },
+        // 简写
+        // isHot(newValue, oldValue) {
+        //   console.log("被调用", newValue, oldValue)
+        // }
+      },
+    })
+    // 完整写法
+    // vm.$watch("isHot",{
+    //   immediate: true, // 初始化时让handler调用一下
+    //       // 当isHot发生改变时，被调用
+    //   handler(newValue, oldValue) {
+    //     console.log("被调用", newValue, oldValue)
+    // }})
+    // 简写（无法书写配置项）
+    vm.$watch("isHot",function(newValue,oldValue){
+      console.log("被调用", newValue, oldValue)
+    })
+  </script>
+</body>
+
+</html>

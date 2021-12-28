@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+    <title>1_天气案例</title>
+    <script src='../../vue.js' type='text/javascript'></script>
+</head>
+<body>
+    <div id='root'>
+        <h2>今天天天气{{isHot ? "炎热" : "凉爽"}}</h2><br>
+        <h2>今天天天气{{info}}, {{x}}</h2>
+        <button @click="changed">切换天气</button><br>
+        <!-- 绑定事件的时候： @xxx="yyy" yyy可以写一些简单的语句 -->
+        <button @click="isHot = !isHot; x++">切换</button>
+    </div>
+    <script type='text/javascript'>
+        Vue.config.productionTip = false;
+        new Vue({
+            el: '#root',
+            data:{
+                isHot:true,
+                x: 1,
+            },
+            methods: {
+                changed(e){
+                    this.isHot = !this.isHot
+                }
+            },
+            computed: {
+                info(){
+                    return this.isHot ? "炎热" : "凉爽"
+                }
+            }
+        })
+    </script>
+</body>
+</html>
