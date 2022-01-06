@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>分析生命周期</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+<body>
+  <div id='root'>
+    <h2>当前的n值：{{n}}</h2>
+    <button @click="add">点我n+1</button>
+    <button @click="bye">点我销毁vm</button>
+  </div>
+  <script type='text/javascript'>
+    Vue.config.productionTip = false;
+    const vm = new Vue({
+      el: '#root',
+      data:{
+        n: 1
+      },
+      methods: {
+        add() {
+          this.n++;
+        },
+        bye() {
+          this.$destroy()
+        }
+      },
+      beforeCreate() {
+        console.log("before被调用",this)
+      },
+      created() {
+        console.log("created 被调用",this)
+      },
+      beforeMount() {
+        console.log("bfMount 被调用",this)
+
+      },
+      mounted() {
+        console.log("mounted 被调用",this)
+      },
+      beforeUpdate() {
+        console.log("bfUpdate 被调用",this)
+        console.log(this.n)
+      },
+      updated() {
+        console.log("updated 被调用",this.n)
+      },
+      beforeDestroy() {
+        console.log("bfDestory 被调用",this)
+      },
+      destroyed() {
+        console.log("destroyed 被调用",this)
+      },
+    })
+  </script>
+</body>
+</html>

@@ -13,30 +13,60 @@
     <h2>人员列表</h2>
     <input type="text" v-model="keyWord" placeholder="请输入">
     <ul>
-      <li v-for="(person,index) in persons" :key="index">
+      <li v-for="(person,index) in filPersons" :key="index">
         {{person.name}}-{{person.age}}-{{person.gender}}</li>
     </ul>
   </div>
   <script type='text/javascript'>
     Vue.config.productionTip = false;
+
+    // 利用watch实现
+    // new Vue({
+    //   el: '#root',
+    //   data:{
+    //     keyWord:"",
+    //     persons: [
+    //       {id: "001", name: "马冬梅", age:18, gender:"女"},
+    //       {id: "002", name: "周冬雨", age:19, gender:"女"},
+    //       {id: "003", name: "周杰伦", age:20, gender:"男"},
+    //       {id: "004", name: "温兆伦", age:22, gender:"男"},
+    //   ],
+    //   filPersons:[]
+    //   },
+    //   watch:{
+    //     keyWord:{
+    //       immediate:true,
+    //       handler(newValue,oldValue){
+    //         this.filPersons = this.persons.filter((p)=>{
+    //           return p.name.indexOf(newValue) !== -1;
+    //         })
+    //         console.log("被改了",newValue,oldValue)
+    //       }
+    //     }
+    //   }
+    // })
+
+    // 利用compute 实现
     new Vue({
-      el: '#root',
-      data:{
-        keyWord:"",
+      el:"#root",
+      data: {
+        keyWord: "",
         persons: [
           {id: "001", name: "马冬梅", age:18, gender:"女"},
           {id: "002", name: "周冬雨", age:19, gender:"女"},
           {id: "003", name: "周杰伦", age:20, gender:"男"},
           {id: "004", name: "温兆伦", age:22, gender:"男"},
-      ]
+        ],
       },
-      watch:{
-        keyWord:{
-          handler(newValue,oldValue){
-            this.persons = this.persons.filter((p)=>{
-              return p.name.indexOf(newValue) !== -1;
+      computed: {
+        filPersons: {
+          get(){
+            return this.persons.filter((p)=>{
+              return p.name.indexOf(this.keyWord) !== -1;
             })
-            console.log("被改了",newValue,oldValue)
+          },
+          set(){
+
           }
         }
       }

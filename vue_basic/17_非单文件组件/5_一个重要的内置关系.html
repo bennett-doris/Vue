@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>一个重要的内置关系</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+<body>
+  <div id='root'>
+  </div>
+  <script type='text/javascript'>
+    Vue.config.productionTip = false;
+    new Vue({
+      el: '#root',
+      data:{
+        name: 'doris'
+      }
+    })
+
+    // 定义一个构造函数
+    function Demo() {
+      this.a = 1
+      this.b = 2
+    }
+
+    // 创建一个Demo的实例对象
+    const d = new Demo()
+
+    console.log(Demo.prototype)  // 显式原型属性
+    console.log(d.__proto__)  // 隐式原型属性
+
+    // 程序员通过显式原型属性操作原型对象，追加一个x属性，值为99
+    Demo.prototype.x = 99
+
+    console.log(d.x)
+  </script>
+</body>
+</html>

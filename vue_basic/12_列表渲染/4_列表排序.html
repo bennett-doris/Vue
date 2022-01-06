@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>列表的过滤</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+<body>
+  <div id='root'>
+    <!-- 遍历数组 -->
+    <h2>人员列表</h2>
+    <input type="text" v-model="keyWord" placeholder="请输入">
+    <button @click="sortType=1">年龄升序</button>
+    <button @click="sortType=2">年龄降序</button>
+    <button @click="sortType=0">原顺序</button>
+    <ul>
+      <li v-for="(person,index) in filPersons" :key="person.id">
+        {{person.name}}-{{person.age}}-{{person.gender}}</li>
+    </ul>
+  </div>
+  <script type="text/javascript">
+    Vue.config.productionTip = false;
+    new Vue({
+      el: "#root",
+      data:{
+        sortType: 0,  // 0 原顺序  1 升序  2 降序
+        keyWord: "",
+        persons: [
+          {id: "001", name: "马冬梅", age:18, gender:"女"},
+          {id: "002", name: "周冬雨", age:23, gender:"女"},
+          {id: "003", name: "周杰伦", age:20, gender:"男"},
+          {id: "004", name: "温兆伦", age:22, gender:"男"},
+        ],
+      },
+      computed: {
+        filPersons: {
+          get(){
+            var arr = this.persons.filter((p)=>{
+              return p.name.indexOf(this.keyWord) !== -1
+            });
+            // 判断是否需要排序
+            if (this.sortType){
+              arr.sort((p1,p2)=>{
+                return this.sortType === 1 ? p2.age - p1.age : p1.age-p2.age
+              })
+              }
+            return arr;
+            }
+          }
+        }
+      }
+    )
+  </script>

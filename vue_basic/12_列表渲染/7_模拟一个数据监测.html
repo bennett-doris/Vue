@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='UTF-8'>
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+  <title>el和data的两种写法</title>
+  <script src='../../vue.js' type='text/javascript'></script>
+</head>
+<body>
+  <div id='root'>
+  </div>
+  <script type='text/javascript'>
+    let data = {
+      name: "doris",
+      address: "老香新村"
+    }
+    let tmp = 1
+    setInterval(()=>{
+      if(data.name !== "doris" && tmp){
+        console.log("data 被改了");
+        tmp = 0
+      }
+    })
+  </script>
+</body>
+</html>
