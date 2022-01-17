@@ -279,3 +279,30 @@ new Vue({
 作用：在下一次DOM更新结束后执行其指定的回调
 
 什么时候用：当改变数据后，要基于更新后的新DOM进行某些操作时，要在nextTick所指定的回调函数中执行
+
+
+
+## Vue 封装的过度与动画
+
+作用：在插入，更新或移除DOM元素时，在合适的时候给元素添加样式类名
+
+- v-enter / v-leave：进入/离开时的起点
+- v-enter-to / v-leave-to： 进入/离开时的终点
+- v-enter-active / v-leave-active：进入/离开的过程中
+
+写法：
+
+- 准备好样式
+
+  - 元素进入的样式
+  - 元素离开的样式
+
+- 使用 `transition` 包裹要过度的元素，并配置name属性
+
+  ```
+  <transition name="hello" appear>
+        <h1 v-show="isShow">你好啊</h1>
+  </transition>
+  ```
+
+- 若多个元素需要过度，则需要使用 `<transition-group>`，且每个元素都要指定 `key`值
