@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script type="text/javascript">
+    // 源数据
+    let person = {
+      name: "张三",
+      age: 18
+    }
+    // #region
+    // 模拟vue2中实现响应式
+    // let p = {}
+    // Object.defineProperty(p,"name",{
+    //   get(){
+    //     return person.name
+    //   },
+    //   set(value){
+    //     console.log("有人修改了name属性")
+    //     person.name = value
+    //   }
+    // })
+    // Object.defineProperty(p,"age",{
+    //   get(){
+    //     return person.age
+    //   },
+    //   set(value){
+    //     console.log("有人修改了age属性")
+    //     person.age = value
+    //   }
+    // })
+    //#endregion
+    
+    // 模拟Vue3中实现响应式
+    const p = new Proxy(person,{
+      // 有人读取p的属性时调用
+      get(target, propName){
+        console.log("有人读取 ",propName)
+        return Reflect.get(target,propName)
+      },
+      // 有人修改p的某个属性，或给p追加某个属性时
+      set(target, propName,value){
+        console.log("有人修改", propName,value)
+        Reflect.set(target,propName,value)
+      },
+      // 有人删除p的某个属性时
+      deleteProperty(target,propName) {
+        console.log("有人删除 ",propName)
+        return Reflect.deleteProperty(target,propName)
+      }
+    })
+  </script>
+</body>
+</html>
